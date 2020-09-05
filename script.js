@@ -6,7 +6,7 @@ var today = moment();
 timeDisplay.text(today.format("dddd, MMMM Do YYYY"));
 
 function loadTasks() {
-    textContent = JSON.parse(localStorage.getItem("tasks"));
+    text = JSON.parse(localStorage.getItem("tasks"));
 };
 
 //coloring the tasks
@@ -31,12 +31,44 @@ function timeMatch() {
     });
     debugger;
 };
+function createTask() {
+
+}
 
 //detect when user clicks save
-$("button").click(function(){
-    var textContent = $(".description").val().trim();
-    localStorage.setItem("tasks", JSON.stringify(textContent));
+$(".saveBtn").click(function(){
+    //pick up user input
+    var text = $(".description").val().trim();
+    //pick up id number
+    var row = $(".description").attr("id");
+
+    //save id number and user input together
+    var tasks = {
+        id: row,
+        content: text
+    }
+    //save to local storage
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 });
+
+//edit task options
+$(".description").click(function(){
+    var text = $(this).val().trim();
+    var id = $(this).attr("id");
+    var textInput = $("<p>").val(text);
+
+    $(this).append(textInput);
+
+    localStorage.getItem(JSON.parse("tasks"))
+
+    //save in local storage
+    tasks.push({
+        id: id,
+        content: text
+    })
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+})
 
 //load tasks on refresh
 loadTasks();
