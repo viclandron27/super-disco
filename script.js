@@ -6,18 +6,28 @@ var today = moment();
 timeDisplay.text(today.format("dddd, MMMM Do YYYY"));
 
 function loadTasks() {
-    text = JSON.parse(localStorage.getItem("tasks"));
+    var getTasks = JSON.parse(localStorage.getItem("tasks"));
+    var rowHour = $(".row").siblings().attr("id")
+    console.log(rowHour);
+    if (getTasks != undefined) {
+        for (var i = 0; i < getTasks.length; i++) {
+           var taskItem =  getTasks[i]
+           //if (getTasks[i].id === )
+           //if (getTask[i].id === )
+           //console.log (taskItem);
+        }
+    }
 };
 
 //coloring the tasks
 function timeMatch() {
     $(".description").each(function(){
         var currentHour = parseInt(moment().format('H'));
-        console.log(currentHour)
+       // console.log(currentHour)
         var rowHour = $(this).attr("id")
-        console.log(rowHour);
+        //console.log(rowHour);
         var rowNumber = parseInt(rowHour);
-        console.log(rowNumber);
+        //console.log(rowNumber);
 
         if (rowNumber === currentHour) {
             $(this).addClass("present");
@@ -31,33 +41,38 @@ function timeMatch() {
     });
     debugger;
 };
-function createTask() {
-
-}
 
 //detect when user clicks save
 $(".saveBtn").click(function(){
     //pick up user input
-    var text = $(".description").val().trim();
+    var text = $(this).siblings(".description").val().trim();
     //pick up id number
-    var row = $(".description").attr("id");
+    var row = $(this).siblings(".description").attr("id");
 
-    //save id number and user input together
-    var tasks = {
-        id: row,
-        content: text
-    }
-    //save to local storage
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+        //save id number and user input together
+        var tasks = {
+            id: row,
+            content: text
+        }
+
+        //save array
+        var dayTasks = JSON.parse(localStorage.getItem("tasks")) || []
+
+        if (dayTasks != undefined) {
+            dayTasks[dayTasks.length] = tasks
+            localStorage.setItem("tasks", JSON.stringify(dayTasks));
+        }
+        else {
+           var dayTasks = []
+           dayTasks[0] = tasks
+           localStorage.setItem("tasks", JSON.stringify(dayTasks));
+        }
 });
 
 //edit task options
-$(".description").click(function(){
-    var text = $(this).val().trim();
-    var id = $(this).attr("id");
-    var textInput = $("<p>").val(text);
-
-    $(this).append(textInput);
+$("textarea").click(function(){
+    var text = $(this).siblings(".description").val();
+    var id = $(this).siblings(".description").attr("id");
 
     localStorage.getItem(JSON.parse("tasks"))
 
