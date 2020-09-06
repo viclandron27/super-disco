@@ -11,8 +11,9 @@ This scheduler allows you to write in tasks in their corresponding time slots to
 * Bootstrap
 
 ## Website
+https://viclandron27.github.io/super-disco/
 
-![](assets/screenshot.pdf)
+![](assets/screenshot.png)
 
 ## Contribution
 Made by Victoria Landron
