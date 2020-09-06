@@ -11,7 +11,6 @@ This scheduler allows you to write in tasks in their corresponding time slots to
 * Bootstrap
 
 ## Website
-https://viclandron27.github.io/code-quiz/
 
 ![](assets/screenshot.pdf)
 
